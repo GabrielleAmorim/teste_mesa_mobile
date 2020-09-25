@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:teste_mesa_mobile/util/values.dart';
+import 'package:teste_mesa_mobile/view/tela_login.dart';
 
 class TelaInicial extends StatelessWidget{
-
-  var main_color = Color(0xff010a53);
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: Container(
-        color: main_color,
+        color: Values.MAIN_COLOR,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -79,10 +80,12 @@ class TelaInicial extends StatelessWidget{
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               side: BorderSide(color: Colors.white)),
-                          color: main_color,
+                          color: Values.MAIN_COLOR,
                           textColor: Colors.white,
                           padding: EdgeInsets.all(8.0),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(TelaLogin());
+                          },
                           child: Text("Entrar com e-mail", overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))
                       ),
                     ),
