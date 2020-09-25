@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:teste_mesa_mobile/controller/tela_login_controller.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
+import 'package:teste_mesa_mobile/view/tela_cadastro.dart';
 
 class TelaLogin extends StatelessWidget {
 
@@ -164,7 +165,7 @@ class TelaLogin extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 15)),
                                           onTap: () {
-                                            print("Clicou");
+                                            Get.to(TelaCadastro());
                                           },
                                         ),
                                       )

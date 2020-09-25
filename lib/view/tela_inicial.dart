@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
+import 'package:teste_mesa_mobile/view/tela_cadastro.dart';
 import 'package:teste_mesa_mobile/view/tela_login.dart';
 
 class TelaInicial extends StatelessWidget{
@@ -90,7 +91,7 @@ class TelaInicial extends StatelessWidget{
                           child: GestureDetector(
                             child: Text("Cadastrar", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 15)),
                             onTap: () {
-                              print("Clicou");
+                              Get.to(TelaCadastro());
                             },
                           ),
                         )

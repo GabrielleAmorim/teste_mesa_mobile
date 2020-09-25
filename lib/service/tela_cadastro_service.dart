@@ -5,24 +5,24 @@ import 'package:teste_mesa_mobile/exception/sem_conexao_exception.dart';
 import 'package:teste_mesa_mobile/service/http.dart';
 import 'package:teste_mesa_mobile/service/request.dart';
 
-class TelaLoginService {
+class TelaCadastroService{
 
-  final int STATUS_CODE_SUCCESS = 200;
 
-  Future<String> login(String email, String senha) async{
+  Future<String> cadastrar(String nome, String email, String senha) async{
     try{
-      String request = Request.rotaLogin();
+      String request = Request.rotaCadastro();
       Map data = {
+        "name": nome,
         "email": email,
         "password": senha
       };
       var response = await HttpService.servicePost(request, data, null);
       var jsonDecode = json.decode(response.body);
-      if(response.statusCode == this.STATUS_CODE_SUCCESS){
+      if(response.statusCode == 201){
         String token = jsonDecode['token'];
         return token;
       } else {
-        throw Exception(jsonDecode['message']);
+        throw Exception(jsonDecode['errors'][0]['message']);
       }
     } on SocketException {
       throw SemConexaoException();
