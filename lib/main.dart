@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teste_mesa_mobile/util/values.dart';
 import 'package:teste_mesa_mobile/view/tela_inicial.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Values.MAIN_COLOR_02,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: TelaInicial(),

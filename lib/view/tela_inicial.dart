@@ -22,29 +22,18 @@ class TelaInicial extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.only(bottom: 30),
                       child: SvgPicture.asset(
-                        "assets/images/logo_me.svg",
+                        "assets/images/logo_a_1_1.svg",
+                        height: MediaQuery.of(context).size.width * 0.3,
                         excludeFromSemantics: true,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 40, left: 0),
-                      child: SvgPicture.asset(
-                        "assets/images/logo_s.svg",
-                        excludeFromSemantics: true,
-                      ),
-                    ),
-                    Container(
-                      child: SvgPicture.asset(
-                        "assets/images/logo_a.svg",
-                        excludeFromSemantics: true,
+                        color: Color(0xffc21712),
                       ),
                     ),
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.only(bottom: 100),
+                  padding: EdgeInsets.only(bottom: 150),
                   child: SvgPicture.asset(
                     "assets/images/news.svg",
                     excludeFromSemantics: true,
