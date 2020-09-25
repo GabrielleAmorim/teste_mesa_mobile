@@ -93,8 +93,9 @@ class TelaInicial extends StatelessWidget{
                               print("Clicou");
                             },
                           ),
-                        )],
-                    )
+                        )
+                      ],
+                    ),
                   ],
                 )
             )
