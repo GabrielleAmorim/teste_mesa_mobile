@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:teste_mesa_mobile/exception/sem_conexao_exception.dart';
 import 'package:teste_mesa_mobile/service/tela_cadastro_service.dart';
-import 'package:teste_mesa_mobile/view/tela_inicial.dart';
 import 'package:toast/toast.dart';
 
 class TelaCadastroController extends GetxController{
 
   final TelaCadastroService _telaCadastroService = new TelaCadastroService();
+  final dataNascimento = ''.obs;
 
   @override
   void onInit() {}
@@ -17,7 +17,6 @@ class TelaCadastroController extends GetxController{
     try{
       var token = await _telaCadastroService.cadastrar(nome, email, senha);
       Toast.show("Usuário cadastrado com sucesso!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-      //Get.offAll(TelaInicial());
       return true;
     } on SemConexaoException {
       Toast.show("Ooops, você está sem conexão! Verifica sua rede wifi ou dados móveis e tente novamente!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
@@ -26,7 +25,11 @@ class TelaCadastroController extends GetxController{
       Toast.show(e.toString(), context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return false;
     }
+  }
 
+  changeDataNascimento(String data){
+    this.dataNascimento.value = data;
+    update();
   }
 
 

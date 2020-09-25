@@ -67,6 +67,7 @@ class TelaLogin extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.only(top: 20),
                               child: TextFormField(
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.lock),
                                   border: OutlineInputBorder(),

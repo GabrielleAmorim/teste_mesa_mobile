@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:teste_mesa_mobile/controller/tela_cadastro_controller.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
 import 'package:teste_mesa_mobile/view/tela_inicial.dart';
+import 'package:toast/toast.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 
 class TelaCadastro extends StatelessWidget{
 
@@ -84,6 +87,7 @@ class TelaCadastro extends StatelessWidget{
                               fontWeight: FontWeight.normal),
                         ),
                         controller: this.senhaController,
+                        obscureText: true
                       ),
                     ),
                   ),
@@ -101,7 +105,54 @@ class TelaCadastro extends StatelessWidget{
                               fontWeight: FontWeight.normal),
                         ),
                         controller: this.confirmarSenhaController,
+                        obscureText: true,
                       ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 20),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      onPressed: () {
+                        DatePicker.showDatePicker(context,
+                            showTitleActions: true,
+                            onConfirm: (date) {
+                              var _date = '${date.day}/${date.month}/${date.year}';
+                              Get.find<TelaCadastroController>().changeDataNascimento(_date);
+                            },
+                            currentTime: DateTime.now(), locale: LocaleType.pt);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text("Data de Nascimento", style: TextStyle(fontSize: 13.5), overflow: TextOverflow.ellipsis,),
+                            GetX<TelaCadastroController>(
+                              builder: (_){
+                                return Row(
+                                  children: <Widget>[
+                                    Container(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(_.dataNascimento.value, style: TextStyle(fontSize: 13.5), overflow: TextOverflow.ellipsis,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 10),
+                                            child: Icon(Icons.date_range, size: 13.5),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                      color: Colors.white,
                     ),
                   ),
                   Container(
@@ -117,12 +168,16 @@ class TelaCadastro extends StatelessWidget{
                         padding: EdgeInsets.all(8.0),
                         onPressed: () async {
                           FocusScope.of(context).unfocus();
-                          var response = await Get.find<TelaCadastroController>().cadastrar(
-                              nomeController.text.toString().trim(),
-                              emailController.text.toString().trim(),
-                              senhaController.text.toString().trim(), context);
-                          if(response){
-                            Get.offAll(TelaInicial());
+                          if(senhaController.text.toString().trim() != confirmarSenhaController.text.toString().trim()){
+                            Toast.show("As senhas não estão iguais!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                          } else {
+                            var response = await Get.find<TelaCadastroController>().cadastrar(
+                                nomeController.text.toString().trim(),
+                                emailController.text.toString().trim(),
+                                senhaController.text.toString().trim(), context);
+                            if(response){
+                              Get.offAll(TelaInicial());
+                            }
                           }
                         },
                         child: Text("Cadastrar",

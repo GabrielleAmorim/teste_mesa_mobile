@@ -17,8 +17,7 @@ dependencies:
   get: ^3.4.6
   http: ^0.12.2
   toast: ^0.1.5
-
-
+  flutter_datetime_picker: ^1.4.0
 
 
 dev_dependencies:
