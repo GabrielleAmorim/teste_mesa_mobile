@@ -16,7 +16,7 @@ class TelaLoginService {
         "email": email,
         "password": senha
       };
-      var response = await HttpService.servicePost(request, data, null);
+      var response = await HttpService.servicePost(request, data);
       var jsonDecode = json.decode(response.body);
       if(response.statusCode == this.STATUS_CODE_SUCCESS){
         String token = jsonDecode['token'];

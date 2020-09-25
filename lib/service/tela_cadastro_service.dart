@@ -16,7 +16,7 @@ class TelaCadastroService{
         "email": email,
         "password": senha
       };
-      var response = await HttpService.servicePost(request, data, null);
+      var response = await HttpService.servicePost(request, data);
       var jsonDecode = json.decode(response.body);
       if(response.statusCode == 201){
         String token = jsonDecode['token'];

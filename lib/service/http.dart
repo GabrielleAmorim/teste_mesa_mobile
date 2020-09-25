@@ -9,11 +9,24 @@ class HttpService{
   static int TIMEOUT = 25;
   static String BASE_URL = "mesa-news-api.herokuapp.com";
 
-  static Future<http.Response> servicePost(String url, Map data, String token, {Map params}) async {
+  static Future<http.Response> serviceGet(String rota, String token, {params}) async {
+    try {
+      var uri_url = Uri.https(BASE_URL, rota, params);
+      var header = {"Content-Type": "application/json", "Authorization": token};
+      var response = await http.get(uri_url, headers: header).timeout(Duration(seconds: TIMEOUT));
+      return response;
+    } on SocketException {
+      throw SemConexaoException();
+    }  catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<http.Response> servicePost(String url, Map data, {Map params}) async {
     var body = json.encode(data);
     try {
       var uri_url = Uri.https(BASE_URL, url, params);
-      final response = await http.post(uri_url, headers: {"Content-Type": "application/json", "token": token}, body: body).timeout(Duration(seconds: TIMEOUT));
+      final response = await http.post(uri_url, headers: {"Content-Type": "application/json"}, body: body).timeout(Duration(seconds: TIMEOUT));
       return response;
     } on SocketException {
       throw SemConexaoException();

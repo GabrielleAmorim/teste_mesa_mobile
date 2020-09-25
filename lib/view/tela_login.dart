@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:teste_mesa_mobile/controller/tela_login_controller.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
 import 'package:teste_mesa_mobile/view/tela_cadastro.dart';
+import 'package:teste_mesa_mobile/view/tela_listagem_noticias.dart';
 
 class TelaLogin extends StatelessWidget {
 
@@ -92,12 +93,15 @@ class TelaLogin extends StatelessWidget {
                                 color: Values.MAIN_COLOR,
                                 textColor: Values.MAIN_COLOR,
                                 padding: EdgeInsets.all(8.0),
-                                onPressed: () {
+                                onPressed: () async{
                                   FocusScope.of(context).unfocus();
-                                  Get.find<TelaLoginController>().login(
+                                  var response = await Get.find<TelaLoginController>().login(
                                       emailController.text.toString().trim(),
                                       senhaController.text.toString().trim(),
                                       context);
+                                  if(response){
+                                    Get.to(TelaListagemNoticias());
+                                  }
                                 },
                                 child: Text("Login",
                                     overflow: TextOverflow.ellipsis,

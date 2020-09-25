@@ -8,4 +8,8 @@ class Request {
     return '/v1/client/auth/signup';
   }
 
+  static String rotaDestaques(){
+    return 'v1/client/news/highlights';
+  }
+
 }
