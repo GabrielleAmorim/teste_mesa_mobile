@@ -17,7 +17,9 @@ class TelaListagemNoticiasController extends GetxController{
   loadDestaques() async {
     try{
       var response = await _telaListagemNoticiasService.loadDestaques();
-      print(response);
+      this.noticiasDestaques.value = response;
+      update();
+      print(this.noticiasDestaques.value);
       Map data = {
         "success": true,
         "message": "Destaques obtidos com sucesso!"
