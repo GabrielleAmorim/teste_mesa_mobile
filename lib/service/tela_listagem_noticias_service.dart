@@ -16,7 +16,7 @@ class TelaListagemNoticiasService{
         var data = jsonDecode["data"];
         for (var item in data) {
           Noticia noticia = new Noticia(title: item['title'], description: item['description'], content: item['content'], author: item['author'], published_at: item['published_at'],
-              highlight: item['highlight'], url: item['url'], image_url: item['image_url']);
+              highlight: item['highlight'], url: item['url'], image_url: item['image_url'], favorite: false);
           retorno.add(noticia);
         }
         return retorno;
@@ -43,7 +43,7 @@ class TelaListagemNoticiasService{
         var data = jsonDecode["data"];
         for (var item in data) {
           Noticia noticia = new Noticia(title: item['title'], description: item['description'], content: item['content'], author: item['author'], published_at: item['published_at'],
-              highlight: item['highlight'], url: item['url'], image_url: item['image_url']);
+              highlight: item['highlight'], url: item['url'], image_url: item['image_url'], favorite: false);
           retorno.add(noticia);
         }
         return retorno;

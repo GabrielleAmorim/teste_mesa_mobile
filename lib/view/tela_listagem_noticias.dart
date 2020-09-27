@@ -7,6 +7,7 @@ import 'package:teste_mesa_mobile/controller/tela_listagem_noticias_controller.d
 import 'package:teste_mesa_mobile/util/helper.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:teste_mesa_mobile/view/tela_filtro.dart';
 
 
 class TelaListagemNoticias extends StatelessWidget {
@@ -27,6 +28,9 @@ class TelaListagemNoticias extends StatelessWidget {
           actions: [
             IconButton(
               icon: Icon(Icons.filter_list, color: Colors.white,),
+              onPressed: () {
+                Get.to(TelaFiltro());
+              },
             )
           ],
         ),
@@ -83,7 +87,19 @@ class TelaListagemNoticias extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Container(
-                                                  child: IconButton(icon: Icon(Icons.favorite_border),),
+                                                  child: Visibility(
+                                                    visible: !_.noticiasDestaques[index].favorite,
+                                                    child: IconButton(icon: Icon(Icons.favorite_border),
+                                                      onPressed: (){
+                                                      _.setDestaqueFavorite(index);
+                                                      },
+                                                    ),
+                                                    replacement: IconButton(icon: Icon(Icons.favorite, color: Colors.red),
+                                                      onPressed: (){
+                                                      _.setDestaqueFavorite(index);
+                                                      },
+                                                    ),
+                                                  )
                                                 ),
                                                 Container(
                                                   padding: EdgeInsets.only(top:16, left: 20),
@@ -145,7 +161,23 @@ class TelaListagemNoticias extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconButton(icon: Icon(Icons.favorite_border), iconSize: 25),
+                              GetX<TelaListagemNoticiasController>(
+                                builder: (_) {
+                                  return Visibility(
+                                    visible: !_.noticias[index].favorite,
+                                    child: IconButton(icon: Icon(Icons.favorite_border),
+                                      onPressed: (){
+                                        Get.find<TelaListagemNoticiasController>().setNoticiaFavorite(index);
+                                      },
+                                    ),
+                                    replacement: IconButton(icon: Icon(Icons.favorite, color: Colors.red),
+                                      onPressed: (){
+                                        Get.find<TelaListagemNoticiasController>().setNoticiaFavorite(index);
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
                               Text(Helper.stringToDate(entry.published_at), style: TextStyle(fontSize: 16),)
                             ],
                           ),

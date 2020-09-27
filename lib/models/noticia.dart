@@ -8,8 +8,9 @@ class Noticia {
   bool highlight;
   String url;
   String image_url;
+  bool favorite;
 
-  Noticia({this.title, this.description, this.content, this.author, this.published_at, this.highlight, this.url, this.image_url});
+  Noticia({this.title, this.description, this.content, this.author, this.published_at, this.highlight, this.url, this.image_url, this.favorite});
 
   factory Noticia.fromJson(Map<String, dynamic> json) {
     return Noticia(
@@ -20,9 +21,18 @@ class Noticia {
         published_at: json['published_at'],
         highlight: json['highlight'],
         url: json['url'],
-        image_url: json['image_url']
+        image_url: json['image_url'],
+        favorite: false
     );
   }
 
+  @override
+  bool operator == (Object other) => identical(this, other) || other is Noticia && runtimeType == other.runtimeType && this.title == other.title;
+
+
+  @override
+  String toString() {
+    return this.title.toString();
+  }
 
 }
