@@ -27,7 +27,6 @@ class TelaLoginService {
     } on SocketException {
       throw SemConexaoException();
     } catch(e){
-      print(e.toString());
       throw Exception(e.toString());
     }
   }

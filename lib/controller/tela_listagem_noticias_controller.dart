@@ -8,6 +8,7 @@ class TelaListagemNoticiasController extends GetxController{
   final TelaListagemNoticiasService _telaListagemNoticiasService = new TelaListagemNoticiasService();
 
   final noticiasDestaques = new List<Noticia>().obs;
+  final PER_PAGE = 20.obs;
 
   @override
   void onInit() {
@@ -19,29 +20,26 @@ class TelaListagemNoticiasController extends GetxController{
       var response = await _telaListagemNoticiasService.loadDestaques();
       this.noticiasDestaques.value = response;
       update();
-      print(this.noticiasDestaques.value);
-      Map data = {
-        "success": true,
-        "message": "Destaques obtidos com sucesso!"
-      };
-      return data;
+      return true;
     }
     on SemConexaoException{
-      print("sem conexao");
-      Map data = {
-        "success": false,
-        "message": "Ooops, você está sem conexão! Verifica sua rede wifi ou dados móveis e tente novamente!"
-      };
-      return data;
+      return false;
     }
     catch(e){
-      print("erro");
-      print(e.toString());
-      Map data = {
-        "success": false,
-        "message": e.toString()
-      };
-      return data;
+      return false;
+    }
+  }
+
+  Future<List<Noticia>> loadNoticias(int currentPage) async{
+    try{
+      var response = await _telaListagemNoticiasService.loadNoticias(currentPage, this.PER_PAGE.value);
+      return response;
+    }
+    on SemConexaoException {
+      return [];
+    }
+    catch(e){
+      return [];
     }
   }
 

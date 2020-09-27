@@ -9,7 +9,11 @@ class Request {
   }
 
   static String rotaDestaques(){
-    return 'v1/client/news/highlights';
+    return '/v1/client/news/highlights';
+  }
+
+  static String rotaNoticias(){
+    return '/v1/client/news';
   }
 
 }

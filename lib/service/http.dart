@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'dart:convert';
 
@@ -9,9 +10,11 @@ class HttpService{
   static int TIMEOUT = 25;
   static String BASE_URL = "mesa-news-api.herokuapp.com";
 
-  static Future<http.Response> serviceGet(String rota, String token, {params}) async {
+  static Future<http.Response> serviceGet(String rota, {params}) async {
     try {
       var uri_url = Uri.https(BASE_URL, rota, params);
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      String token = await sharedPreferences.getString('token');
       var header = {"Content-Type": "application/json", "Authorization": token};
       var response = await http.get(uri_url, headers: header).timeout(Duration(seconds: TIMEOUT));
       return response;
