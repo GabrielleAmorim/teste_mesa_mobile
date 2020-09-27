@@ -86,29 +86,39 @@ class TelaLogin extends StatelessWidget {
                             padding: EdgeInsets.only(top: 30),
                             width: MediaQuery.of(context).size.width,
                             height: 80,
-                            child: FlatButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    side: BorderSide(color: Values.MAIN_COLOR)),
-                                color: Values.MAIN_COLOR,
-                                textColor: Values.MAIN_COLOR,
-                                padding: EdgeInsets.all(8.0),
-                                onPressed: () async{
-                                  FocusScope.of(context).unfocus();
-                                  var response = await Get.find<TelaLoginController>().login(
-                                      emailController.text.toString().trim(),
-                                      senhaController.text.toString().trim(),
-                                      context);
-                                  if(response){
-                                    Get.to(TelaListagemNoticias());
-                                  }
-                                },
-                                child: Text("Login",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18))),
+                            child: GetX<TelaLoginController>(
+                              builder: (_) {
+                                return Visibility(
+                                  visible: !_.isLoading.value,
+                                  child: FlatButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          side: BorderSide(color: Values.MAIN_COLOR)),
+                                      color: Values.MAIN_COLOR,
+                                      textColor: Values.MAIN_COLOR,
+                                      padding: EdgeInsets.all(8.0),
+                                      onPressed: () async{
+                                        FocusScope.of(context).unfocus();
+                                        var response = await Get.find<TelaLoginController>().login(
+                                            emailController.text.toString().trim(),
+                                            senhaController.text.toString().trim(),
+                                            context);
+                                        if(response){
+                                          Get.to(TelaListagemNoticias());
+                                        }
+                                      },
+                                      child: Text("Login",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))),
+                                  replacement: Container(
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),

@@ -139,7 +139,9 @@ class TelaListagemNoticias extends StatelessWidget {
               PagewiseSliverList(
                   pageSize: 10,
                   loadingBuilder: (context) {
-                    return Text('Carregando...');
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
                   },
                   noItemsFoundBuilder: (context) {
                     return Text('Não foram encontrados registros!');
