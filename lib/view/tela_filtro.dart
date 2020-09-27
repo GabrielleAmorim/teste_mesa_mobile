@@ -128,13 +128,13 @@ class TelaFiltro extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           child: GestureDetector(
             child: Container(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: MediaQuery.of(context).size.height * 0.08,
                 color: Values.MAIN_COLOR,
                 child: Center(
                   child: Text(
                     "Filtrar",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 )),
             onTap: () {
