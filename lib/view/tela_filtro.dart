@@ -28,15 +28,17 @@ class TelaFiltro extends StatelessWidget {
           ),
           actions: [
             GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.find<TelaFiltroController>().limparFiltro();
                 },
                 child: Container(
                   padding: EdgeInsets.only(right: 10),
                   alignment: Alignment.centerRight,
-                  child: Text("Limpar", style: TextStyle(color: Colors.white, fontSize: 16),),
-                )
-            )
+                  child: Text(
+                    "Limpar",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ))
           ],
         ),
         body: Column(
@@ -100,28 +102,45 @@ class TelaFiltro extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.only(left: 10, top: 10),
-                    child: Text("Apenas favoritos", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    child: Text("Apenas favoritos",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                   ),
                   Container(
-                    child: SizedBox(
-                        width: 80,
-                        height: 10,
-                        child: GetX<TelaFiltroController>(
-                          builder: (_) {
-                            return CupertinoSwitch(
-                              value: _.apenasFavoritos.value,
-                              onChanged: (bool val){
-                                _.changeApenasFavoritos(val);
-                              },
-                            );
-                          },
-                        )
-                    )
-                  )
+                      child: SizedBox(
+                          width: 80,
+                          height: 10,
+                          child: GetX<TelaFiltroController>(
+                            builder: (_) {
+                              return CupertinoSwitch(
+                                value: _.apenasFavoritos.value,
+                                onChanged: (bool val) {
+                                  _.changeApenasFavoritos(val);
+                                },
+                              );
+                            },
+                          )))
                 ],
               )),
             ),
           ],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: GestureDetector(
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.05,
+                color: Values.MAIN_COLOR,
+                child: Center(
+                  child: Text(
+                    "Filtrar",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                )),
+            onTap: () {
+              print("tocou");
+            },
+          ),
         ));
   }
 }
