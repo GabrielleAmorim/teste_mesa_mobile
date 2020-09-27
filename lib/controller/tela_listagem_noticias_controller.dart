@@ -8,7 +8,7 @@ class TelaListagemNoticiasController extends GetxController{
   final TelaListagemNoticiasService _telaListagemNoticiasService = new TelaListagemNoticiasService();
 
   final noticiasDestaques = new List<Noticia>().obs;
-  final PER_PAGE = 20.obs;
+  final PER_PAGE = 10;
 
   @override
   void onInit() {
@@ -32,7 +32,7 @@ class TelaListagemNoticiasController extends GetxController{
 
   Future<List<Noticia>> loadNoticias(int currentPage) async{
     try{
-      var response = await _telaListagemNoticiasService.loadNoticias(currentPage, this.PER_PAGE.value);
+      var response = await _telaListagemNoticiasService.loadNoticias(currentPage, this.PER_PAGE);
       return response;
     }
     on SemConexaoException {

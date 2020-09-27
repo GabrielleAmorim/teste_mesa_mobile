@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:teste_mesa_mobile/controller/tela_listagem_noticias_controller.dart';
 import 'package:teste_mesa_mobile/util/helper.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 
 
@@ -104,8 +103,25 @@ class TelaListagemNoticias extends StatelessWidget {
                       )
                   )
               ),
+              SliverToBoxAdapter(
+                child: Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top: 10, left: 20),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Últimas notícias",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               PagewiseSliverList(
-                  pageSize: 20,
+                  pageSize: 10,
                   loadingBuilder: (context) {
                     return Text('Carregando...');
                   },
@@ -113,13 +129,43 @@ class TelaListagemNoticias extends StatelessWidget {
                     return Text('Não foram encontrados registros!');
                   },
                   itemBuilder: (context, entry, index) {
-                    return ListTile(
-                      title: Text(
-                        (entry.title),
-                      ),
+                    return Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 30),
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.4,
+                          child: FittedBox(
+                            child: Image.network(entry.image_url),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(icon: Icon(Icons.favorite_border), iconSize: 25),
+                              Text(Helper.stringToDate(entry.published_at), style: TextStyle(fontSize: 16),)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right:10),
+                          child: Text(entry.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20), textAlign: TextAlign.justify,),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                          child: Text(entry.description, style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 16), textAlign: TextAlign.justify),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(right: 10, left:10),
+                          child: Divider(color: Colors.black,),
+                        )
+                      ],
                     );
                   },
-                  pageFuture: (pageIndex) => Get.find<TelaListagemNoticiasController>().loadNoticias(pageIndex)
+                  pageFuture: (pageIndex) => Get.find<TelaListagemNoticiasController>().loadNoticias(pageIndex + 1)
               ),
             ],
           ),
