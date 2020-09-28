@@ -25,7 +25,7 @@ class TelaLoginController extends GetxController{
       return true;
     } on SemConexaoException {
       this.isLoading.value = false;
-      Toast.show("Ooops, você está sem conexão! Verifica sua rede wifi ou dados móveis e tente novamente!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      Toast.show("Ooops, você está sem conexão! Verifique sua rede wifi ou dados móveis e tente novamente!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return false;
     } catch (e) {
       this.isLoading.value = false;

@@ -24,9 +24,11 @@ class TelaCadastroService{
       } else {
         throw Exception(jsonDecode['errors'][0]['message']);
       }
-    } on SocketException {
+    }
+    on SemConexaoException {
       throw SemConexaoException();
-    } catch(e){
+    }
+    catch(e){
       throw Exception(e.toString());
     }
   }

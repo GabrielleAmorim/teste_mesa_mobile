@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:teste_mesa_mobile/exception/sem_conexao_exception.dart';
 import 'package:teste_mesa_mobile/models/noticia.dart';
 import 'package:teste_mesa_mobile/service/http.dart';
 import 'package:teste_mesa_mobile/service/request.dart';
@@ -24,6 +25,9 @@ class TelaListagemNoticiasService{
         throw Exception(jsonDecode['message']);
       }
     }
+    on SemConexaoException {
+      throw SemConexaoException();
+    }
     catch(e){
       throw Exception(e.toString());
     }
@@ -46,6 +50,9 @@ class TelaListagemNoticiasService{
       } else {
         throw Exception(jsonDecode['message']);
       }
+    }
+    on SemConexaoException {
+      throw SemConexaoException();
     }
     catch(e){
       throw Exception(e.toString());

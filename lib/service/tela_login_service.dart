@@ -24,7 +24,7 @@ class TelaLoginService {
       } else {
         throw Exception(jsonDecode['message']);
       }
-    } on SocketException {
+    } on SemConexaoException {
       throw SemConexaoException();
     } catch(e){
       throw Exception(e.toString());
