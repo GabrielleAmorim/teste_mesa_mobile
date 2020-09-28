@@ -2,11 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:teste_mesa_mobile/controller/tela_login_controller.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
 import 'package:teste_mesa_mobile/view/tela_cadastro.dart';
+import 'package:teste_mesa_mobile/view/tela_listagem_noticias.dart';
 import 'package:teste_mesa_mobile/view/tela_login.dart';
 
 class TelaInicial extends StatelessWidget{
+
+  final TelaLoginController _telaLoginController = Get.put(TelaLoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,12 @@ class TelaInicial extends StatelessWidget{
                           color: Colors.white,
                           textColor: Colors.white,
                           padding: EdgeInsets.all(8.0),
-                          onPressed: () {},
+                          onPressed: () async {
+                            var response = await Get.find<TelaLoginController>().loginComFacebook();
+                            if (response) {
+                              Get.to(TelaListagemNoticias());
+                            }
+                          },
                           child: Text("Entrar com facebook", overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 18))
                       ),
                     ),

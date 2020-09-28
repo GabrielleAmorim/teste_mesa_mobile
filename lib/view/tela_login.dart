@@ -7,6 +7,8 @@ import 'package:teste_mesa_mobile/util/values.dart';
 import 'package:teste_mesa_mobile/view/tela_cadastro.dart';
 import 'package:teste_mesa_mobile/view/tela_listagem_noticias.dart';
 
+import '../controller/tela_login_controller.dart';
+
 class TelaLogin extends StatelessWidget {
 
   final TelaLoginController _telaLoginController = Get.put(TelaLoginController());
@@ -149,7 +151,12 @@ class TelaLogin extends StatelessWidget {
                                         color: Colors.white,
                                         textColor: Values.MAIN_COLOR,
                                         padding: EdgeInsets.all(8.0),
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          var response = await Get.find<TelaLoginController>().loginComFacebook();
+                                          if (response) {
+                                            Get.to(TelaListagemNoticias());
+                                          }
+                                        },
                                         child: Text("Entrar com facebook",
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(

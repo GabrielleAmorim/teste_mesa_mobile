@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teste_mesa_mobile/exception/login_incorreto_exception.dart';
 import 'package:teste_mesa_mobile/exception/sem_conexao_exception.dart';
+import 'package:teste_mesa_mobile/service/facebook_service.dart';
 import 'package:teste_mesa_mobile/service/tela_login_service.dart';
 import 'package:toast/toast.dart';
 
@@ -10,6 +12,8 @@ import 'package:toast/toast.dart';
 class TelaLoginController extends GetxController{
 
   final TelaLoginService telaLoginService = new TelaLoginService();
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
+
 
   final isLoading = false.obs;
 
@@ -41,6 +45,35 @@ class TelaLoginController extends GetxController{
     }
 
   }
+
+  loginComFacebook() async {
+    this.isLoading.value = true;
+    final FacebookLoginResult result =
+    await facebookSignIn.logIn(['email']);
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final FacebookAccessToken accessToken = result.accessToken;
+        var dadosUsuarioFacebook = await FacebookService.carregarInfosUsuarioFacebook(accessToken.token, accessToken.userId);
+        this.isLoading.value = false;
+        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+        sharedPreferences.setString('token', 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NzgsImVtYWlsIjoiZ2FicmllbGxlcG9ydG8yMUBnbWFpbC5jb20ifQ.G5eExxK65ZFNyVb8hokWlvPn0v5T5VVc6gUIEnjZbAw');
+        return true;
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        this.isLoading.value = false;
+        print('Login cancelled by the user.');
+        return false;
+        break;
+      case FacebookLoginStatus.error:
+        this.isLoading.value = false;
+        print('Something went wrong with the login process.\n'
+            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        return false;
+        break;
+    }
+  }
+
+
 
 
 }

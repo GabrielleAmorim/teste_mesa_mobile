@@ -15,5 +15,4 @@ class Request {
   static String rotaNoticias(){
     return '/v1/client/news';
   }
-
 }
