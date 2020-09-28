@@ -29,7 +29,7 @@ class TelaListagemNoticias extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.filter_list, color: Colors.white,),
               onPressed: () {
-                Get.to(TelaFiltro());
+                Get.to(TelaFiltro()).then((value) => Get.find<TelaListagemNoticiasController>().loadNoticias(1));
               },
             )
           ],
@@ -144,7 +144,10 @@ class TelaListagemNoticias extends StatelessWidget {
                     );
                   },
                   noItemsFoundBuilder: (context) {
-                    return Text('Não foram encontrados registros!');
+                    return Container(
+                      padding: EdgeInsets.only(top: 60),
+                      child: Text('Não foram encontrados registros!', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    );
                   },
                   itemBuilder: (context, entry, index) {
                     return Column(
@@ -199,7 +202,7 @@ class TelaListagemNoticias extends StatelessWidget {
                       ],
                     );
                   },
-                  pageFuture: (pageIndex) => Get.find<TelaListagemNoticiasController>().loadNoticias(pageIndex + 1)
+                  pageFuture: (pageIndex) => Get.find<TelaListagemNoticiasController>().loadNoticias(pageIndex)
               ),
             ],
           ),

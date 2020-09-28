@@ -29,13 +29,9 @@ class TelaListagemNoticiasService{
     }
   }
 
-  Future<List<Noticia>> loadNoticias(int currentPage, int perPage) async{
+  Future<List<Noticia>> loadNoticias(Map<String, String> params) async{
     try{
       String request = Request.rotaNoticias();
-      Map<String, String> params = {
-        'current_page': currentPage.toString(),
-        'per_page': perPage.toString()
-      };
       var response = await HttpService.serviceGet(request, params: params);
       var jsonDecode = json.decode(response.body);
       if(response.statusCode == 200){

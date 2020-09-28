@@ -159,33 +159,43 @@ class TelaCadastro extends StatelessWidget{
                     padding: EdgeInsets.only(top: 30),
                     width: MediaQuery.of(context).size.width,
                     height: 80,
-                    child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Values.MAIN_COLOR)),
-                        color: Values.MAIN_COLOR,
-                        textColor: Values.MAIN_COLOR,
-                        padding: EdgeInsets.all(8.0),
-                        onPressed: () async {
-                          FocusScope.of(context).unfocus();
-                          if(senhaController.text.toString().trim() != confirmarSenhaController.text.toString().trim()){
-                            Toast.show("As senhas não estão iguais!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                          } else {
-                            var response = await Get.find<TelaCadastroController>().cadastrar(
-                                nomeController.text.toString().trim(),
-                                emailController.text.toString().trim(),
-                                senhaController.text.toString().trim(), context);
-                            if(response){
-                              Get.offAll(TelaInicial());
-                            }
-                          }
-                        },
-                        child: Text("Cadastrar",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18))),
+                    child: GetX<TelaCadastroController>(
+                      builder: (_) {
+                        return Visibility(
+                          visible: !_.isLoading.value,
+                          child: FlatButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  side: BorderSide(color: Values.MAIN_COLOR)),
+                              color: Values.MAIN_COLOR,
+                              textColor: Values.MAIN_COLOR,
+                              padding: EdgeInsets.all(8.0),
+                              onPressed: () async {
+                                FocusScope.of(context).unfocus();
+                                if(senhaController.text.toString().trim() != confirmarSenhaController.text.toString().trim()){
+                                  Toast.show("As senhas não estão iguais!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                                } else {
+                                  var response = await Get.find<TelaCadastroController>().cadastrar(
+                                      nomeController.text.toString().trim(),
+                                      emailController.text.toString().trim(),
+                                      senhaController.text.toString().trim(), context);
+                                  if(response){
+                                    Get.offAll(TelaInicial());
+                                  }
+                                }
+                              },
+                              child: Text("Cadastrar",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18))),
+                          replacement: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

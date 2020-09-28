@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
-import 'package:teste_mesa_mobile/controller/tela_cadastro_controller.dart';
-import 'package:teste_mesa_mobile/controller/tela_filtro_controller.dart';
+import 'package:teste_mesa_mobile/controller/tela_listagem_noticias_controller.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
+import 'package:teste_mesa_mobile/view/tela_listagem_noticias.dart';
 
 class TelaFiltro extends StatelessWidget {
-  final TelaFiltroController _telaFiltroController =
-      Get.put(TelaFiltroController());
+
+  final TelaListagemNoticiasController _telaFiltroController = Get.put(TelaListagemNoticiasController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TelaFiltro extends StatelessWidget {
           actions: [
             GestureDetector(
                 onTap: () {
-                  Get.find<TelaFiltroController>().limparFiltro();
+                  Get.find<TelaListagemNoticiasController>().limparFiltro();
                 },
                 child: Container(
                   padding: EdgeInsets.only(right: 10),
@@ -48,8 +48,9 @@ class TelaFiltro extends StatelessWidget {
                 onPressed: () {
                   DatePicker.showDatePicker(context, showTitleActions: true,
                       onConfirm: (date) {
-                    var _date = '${date.day}/${date.month}/${date.year}';
-                    Get.find<TelaFiltroController>().changeData(_date);
+                    var _dateFiltro = '${date.day}/${date.month}/${date.year}';
+                    var _dateFormatada = '${date.year}-${date.month}-${date.day}';
+                    Get.find<TelaListagemNoticiasController>().changeData(_dateFiltro, _dateFormatada);
                   }, currentTime: DateTime.now(), locale: LocaleType.pt);
                 },
                 child: Container(
@@ -64,7 +65,7 @@ class TelaFiltro extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      GetX<TelaFiltroController>(
+                      GetX<TelaListagemNoticiasController>(
                         builder: (_) {
                           return Row(
                             children: <Widget>[
@@ -110,7 +111,7 @@ class TelaFiltro extends StatelessWidget {
                       child: SizedBox(
                           width: 80,
                           height: 10,
-                          child: GetX<TelaFiltroController>(
+                          child: GetX<TelaListagemNoticiasController>(
                             builder: (_) {
                               return CupertinoSwitch(
                                 value: _.apenasFavoritos.value,
@@ -137,8 +138,8 @@ class TelaFiltro extends StatelessWidget {
                         color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 )),
-            onTap: () {
-              print("tocou");
+            onTap: () async {
+              Get.to(TelaListagemNoticias());
             },
           ),
         ));

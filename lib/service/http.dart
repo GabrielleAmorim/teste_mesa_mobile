@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
@@ -20,7 +22,11 @@ class HttpService{
       return response;
     } on SocketException {
       throw SemConexaoException();
-    }  catch (e) {
+    }
+    on TimeoutException {
+      throw SemConexaoException();
+    }
+    catch (e) {
       throw Exception(e.toString());
     }
   }
@@ -33,7 +39,11 @@ class HttpService{
       return response;
     } on SocketException {
       throw SemConexaoException();
-    } catch (e) {
+    }
+    on TimeoutException {
+      throw SemConexaoException();
+    }
+    catch (e) {
       throw Exception(e.toString());
     }
   }
