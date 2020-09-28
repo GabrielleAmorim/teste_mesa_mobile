@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 import 'package:teste_mesa_mobile/controller/tela_listagem_noticias_controller.dart';
 import 'package:teste_mesa_mobile/util/helper.dart';
 import 'package:teste_mesa_mobile/util/values.dart';
@@ -194,6 +195,14 @@ class TelaListagemNoticias extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                           child: Text(entry.description, style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 16), textAlign: TextAlign.justify),
+                        ),
+                        Container(
+                            alignment: Alignment.bottomRight,
+                            padding: EdgeInsets.only(right: 20),
+                            child: IconButton(icon: Icon(Icons.share, color: Colors.black54,),
+                            onPressed: () async {
+                              Share.share(entry.url);
+                            },)
                         ),
                         Container(
                           padding: EdgeInsets.only(right: 10, left:10),

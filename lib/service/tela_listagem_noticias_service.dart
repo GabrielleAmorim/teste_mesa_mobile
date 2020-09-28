@@ -41,7 +41,6 @@ class TelaListagemNoticiasService{
       if(response.statusCode == 200){
         List<Noticia> retorno = new List<Noticia>();
         var data = jsonDecode["data"];
-        print(pageIndex);
         for (int i = 0; i < data.length; i++){
           var item = data[i];
           Noticia noticia = new Noticia(title: item['title'], description: item['description'], content: item['content'], author: item['author'], published_at: item['published_at'],
