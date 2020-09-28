@@ -9,8 +9,11 @@ class Noticia {
   String url;
   String image_url;
   bool favorite;
+  int pageIndex;
+  int indiceFavorito;
 
-  Noticia({this.title, this.description, this.content, this.author, this.published_at, this.highlight, this.url, this.image_url, this.favorite});
+  Noticia({this.title, this.description, this.content, this.author, this.published_at, this.highlight, this.url, this.image_url,
+    this.favorite, this.pageIndex, this.indiceFavorito});
 
   factory Noticia.fromJson(Map<String, dynamic> json) {
     return Noticia(

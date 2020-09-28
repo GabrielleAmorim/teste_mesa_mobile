@@ -10,7 +10,6 @@ class TelaListagemNoticiasController extends GetxController{
   final noticiasDestaques = new List<Noticia>().obs;
   final PER_PAGE = 10;
   final noticias = new List<Noticia>().obs;
-  final noticiasFavoritas = new List<Noticia>();
 
   final dataFiltro = ''.obs;
   final dataFormatada = ''.obs;
@@ -56,7 +55,7 @@ class TelaListagemNoticiasController extends GetxController{
             'per_page': this.PER_PAGE.toString(),
             'published_at': this.dataFormatada.value.toString()
           };
-          var response = await _telaListagemNoticiasService.loadNoticias(params);
+          var response = await _telaListagemNoticiasService.loadNoticias(params, currentPage);
           this.noticias.value += response;
           return response;
         } else {
@@ -64,7 +63,7 @@ class TelaListagemNoticiasController extends GetxController{
             'current_page': currentPage.toString(),
             'per_page': this.PER_PAGE.toString()
           };
-          var response = await _telaListagemNoticiasService.loadNoticias(params);
+          var response = await _telaListagemNoticiasService.loadNoticias(params, currentPage);
           this.noticias.value += response;
           return response;
         }
@@ -83,7 +82,7 @@ class TelaListagemNoticiasController extends GetxController{
             break;
           }
           else {
-            noticiasRetorno.add(this.noticias[i]);
+            noticiasRetorno.add(noticiasFavoritas[i]);
           }
         }
         return noticiasRetorno;

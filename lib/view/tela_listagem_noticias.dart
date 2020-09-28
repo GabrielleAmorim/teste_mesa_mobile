@@ -169,7 +169,7 @@ class TelaListagemNoticias extends StatelessWidget {
                               GetX<TelaListagemNoticiasController>(
                                 builder: (_) {
                                   return Visibility(
-                                    visible: !_.noticias[index].favorite,
+                                    visible: !_.noticias[entry.indiceFavorito].favorite,
                                     child: IconButton(icon: Icon(Icons.favorite_border),
                                       onPressed: (){
                                         Get.find<TelaListagemNoticiasController>().setNoticiaFavorite(index);
@@ -177,13 +177,13 @@ class TelaListagemNoticias extends StatelessWidget {
                                     ),
                                     replacement: IconButton(icon: Icon(Icons.favorite, color: Colors.red),
                                       onPressed: (){
-                                        Get.find<TelaListagemNoticiasController>().setNoticiaFavorite(index);
+                                        Get.find<TelaListagemNoticiasController>().setNoticiaFavorite(entry.indiceFavorito);
                                       },
                                     ),
                                   );
                                 },
                               ),
-                              Text(Helper.stringToDate(entry.published_at), style: TextStyle(fontSize: 16),)
+                              Text(Helper.stringToDate(entry.published_at), style: TextStyle(fontSize: 16),),
                             ],
                           ),
                         ),
