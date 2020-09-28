@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teste_mesa_mobile/exception/login_incorreto_exception.dart';
 import 'package:teste_mesa_mobile/exception/sem_conexao_exception.dart';
 import 'package:teste_mesa_mobile/service/tela_login_service.dart';
 import 'package:toast/toast.dart';
@@ -27,7 +28,13 @@ class TelaLoginController extends GetxController{
       this.isLoading.value = false;
       Toast.show("Ooops, você está sem conexão! Verifique sua rede wifi ou dados móveis e tente novamente!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return false;
-    } catch (e) {
+    }
+    on LoginIncorretoException {
+      this.isLoading.value = false;
+      Toast.show("Login ou senha incorreto!", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+      return false;
+    }
+    catch (e) {
       this.isLoading.value = false;
       Toast.show(e.toString(), context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return false;
