@@ -10,6 +10,7 @@ class TelaCadastroController extends GetxController{
   final TelaCadastroService _telaCadastroService = new TelaCadastroService();
   final dataNascimento = ''.obs;
   final isLoading = false.obs;
+  final autoValidate = [false, false, false, false].obs;
 
   @override
   void onInit() {}
