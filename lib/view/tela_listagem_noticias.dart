@@ -80,7 +80,7 @@ class TelaListagemNoticias extends StatelessWidget {
                                           children: [
                                             Container(
                                               padding: const EdgeInsets.all(16.0),
-                                              width: MediaQuery.of(context).size.width * 0.6,
+                                              width: MediaQuery.of(context).size.width * 0.8,
                                               child: Text(_.noticiasDestaques[index].title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                                             ),
                                             Row(
@@ -125,7 +125,7 @@ class TelaListagemNoticias extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(top: 10, left: 20),
+                        padding: EdgeInsets.only(top: 20, left: 20),
                         alignment: Alignment.topLeft,
                         child: Text(
                           "Últimas notícias",
