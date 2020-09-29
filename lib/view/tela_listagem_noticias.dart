@@ -58,7 +58,7 @@ class TelaListagemNoticias extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                   child: Container(
-                      height: MediaQuery.of(context).size.height / 4,
+                      height: MediaQuery.of(context).size.height / 3.5,
                       padding: EdgeInsets.only(left: 20, top: 10),
                       child: GetX<TelaListagemNoticiasController> (
                         builder: (_) {
@@ -67,52 +67,54 @@ class TelaListagemNoticias extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          child: Image.network(_.noticiasDestaques[index].image_url, width: 180, height: 150,),
-                                        ),
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(16.0),
-                                              width: MediaQuery.of(context).size.width * 0.8,
-                                              child: Text(_.noticiasDestaques[index].title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  child: Visibility(
-                                                    visible: !_.noticiasDestaques[index].favorite,
-                                                    child: IconButton(icon: Icon(Icons.favorite_border),
-                                                      onPressed: (){
-                                                      _.setDestaqueFavorite(index);
-                                                      },
-                                                    ),
-                                                    replacement: IconButton(icon: Icon(Icons.favorite, color: Colors.red),
-                                                      onPressed: (){
-                                                      _.setDestaqueFavorite(index);
-                                                      },
-                                                    ),
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: Image.network(_.noticiasDestaques[index].image_url, width: 180, height: 150,),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                padding: const EdgeInsets.all(16.0),
+                                                width: MediaQuery.of(context).size.width * 0.6,
+                                                child: Text(_.noticiasDestaques[index].title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      child: Visibility(
+                                                        visible: !_.noticiasDestaques[index].favorite,
+                                                        child: IconButton(icon: Icon(Icons.favorite_border),
+                                                          onPressed: (){
+                                                            _.setDestaqueFavorite(index);
+                                                          },
+                                                        ),
+                                                        replacement: IconButton(icon: Icon(Icons.favorite, color: Colors.red),
+                                                          onPressed: (){
+                                                            _.setDestaqueFavorite(index);
+                                                          },
+                                                        ),
+                                                      )
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(top:16, left: 20),
+                                                    child: Text(Helper.stringToDate(_.noticiasDestaques[index].published_at)),
                                                   )
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.only(top:16, left: 20),
-                                                  child: Text(Helper.stringToDate(_.noticiasDestaques[index].published_at)),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 );
                               }
                           );
