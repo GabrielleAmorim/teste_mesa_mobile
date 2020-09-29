@@ -31,6 +31,7 @@ class TelaListagemNoticiasController extends GetxController{
           }
         }
         this.noticiasDestaques.value = favoritos;
+        update();
       } else {
         var response = await _telaListagemNoticiasService.loadDestaques();
         this.noticiasDestaques.value = response;
@@ -127,8 +128,8 @@ class TelaListagemNoticiasController extends GetxController{
   limparFiltro(){
     this.dataFiltro.value = '';
     this.dataFormatada.value = '';
-    update();
     this.apenasFavoritos.value = false;
+    this.loadDestaques();
     update();
   }
 
