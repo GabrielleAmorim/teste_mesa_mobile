@@ -46,7 +46,7 @@ class TelaLoginController extends GetxController{
 
   }
 
-  loginComFacebook() async {
+  loginComFacebook(BuildContext context) async {
     this.isLoading.value = true;
     final FacebookLoginResult result =
     await facebookSignIn.logIn(['email']);
@@ -54,20 +54,19 @@ class TelaLoginController extends GetxController{
       case FacebookLoginStatus.loggedIn:
         final FacebookAccessToken accessToken = result.accessToken;
         var dadosUsuarioFacebook = await FacebookService.carregarInfosUsuarioFacebook(accessToken.token, accessToken.userId);
-        this.isLoading.value = false;
         SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('token', 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NzgsImVtYWlsIjoiZ2FicmllbGxlcG9ydG8yMUBnbWFpbC5jb20ifQ.G5eExxK65ZFNyVb8hokWlvPn0v5T5VVc6gUIEnjZbAw');
+        this.isLoading.value = false;
         return true;
         break;
       case FacebookLoginStatus.cancelledByUser:
         this.isLoading.value = false;
-        print('Login cancelled by the user.');
+        Toast.show("Login cancelado pelo usuário!", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         return false;
         break;
       case FacebookLoginStatus.error:
         this.isLoading.value = false;
-        print('Something went wrong with the login process.\n'
-            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        Toast.show("Ocorreu um erro no processamento da requisição! - " + result.errorMessage, context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         return false;
         break;
     }

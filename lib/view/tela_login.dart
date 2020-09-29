@@ -152,7 +152,7 @@ class TelaLogin extends StatelessWidget {
                                         textColor: Values.MAIN_COLOR,
                                         padding: EdgeInsets.all(8.0),
                                         onPressed: () async {
-                                          var response = await Get.find<TelaLoginController>().loginComFacebook();
+                                          var response = await Get.find<TelaLoginController>().loginComFacebook(context);
                                           if (response) {
                                             Get.to(TelaListagemNoticias());
                                           }
