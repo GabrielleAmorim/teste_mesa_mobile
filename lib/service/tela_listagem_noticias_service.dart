@@ -4,13 +4,14 @@ import 'package:teste_mesa_mobile/exception/sem_conexao_exception.dart';
 import 'package:teste_mesa_mobile/models/noticia.dart';
 import 'package:teste_mesa_mobile/service/http.dart';
 import 'package:teste_mesa_mobile/service/request.dart';
+import 'package:teste_mesa_mobile/util/values.dart';
 
 class TelaListagemNoticiasService{
 
   Future<List<Noticia>> loadDestaques() async{
     try{
       String request = Request.rotaDestaques();
-      var response = await HttpService.serviceGet(request);
+      var response = await HttpService.serviceGet(Values.BASE_URL, request);
       var jsonDecode = json.decode(response.body);
       if(response.statusCode == 200){
         List<Noticia> retorno = new List<Noticia>();
@@ -36,7 +37,7 @@ class TelaListagemNoticiasService{
   Future<List<Noticia>> loadNoticias(Map<String, String> params, pageIndex) async{
     try{
       String request = Request.rotaNoticias();
-      var response = await HttpService.serviceGet(request, params: params);
+      var response = await HttpService.serviceGet(Values.BASE_URL, request, params: params);
       var jsonDecode = json.decode(response.body);
       if(response.statusCode == 200){
         List<Noticia> retorno = new List<Noticia>();

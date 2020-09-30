@@ -7,6 +7,8 @@ class Values {
 
   static const int COR_PRINCIPAL = 0xFF003153;
 
+  static String BASE_URL = "mesa-news-api.herokuapp.com";
+
   static const MaterialColor MAIN_COLOR_02 = MaterialColor(
     COR_PRINCIPAL,
     <int, Color>{

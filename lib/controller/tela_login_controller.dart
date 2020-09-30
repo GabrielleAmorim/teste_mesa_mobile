@@ -12,7 +12,8 @@ import 'package:toast/toast.dart';
 class TelaLoginController extends GetxController{
 
   final TelaLoginService telaLoginService = new TelaLoginService();
-  static final FacebookLogin facebookSignIn = new FacebookLogin();
+  final FacebookLogin facebookSignIn = new FacebookLogin();
+  final FacebookService _facebookService = new FacebookService();
 
 
   final isLoading = false.obs;
@@ -53,7 +54,7 @@ class TelaLoginController extends GetxController{
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final FacebookAccessToken accessToken = result.accessToken;
-        var dadosUsuarioFacebook = await FacebookService.carregarInfosUsuarioFacebook(accessToken.token, accessToken.userId);
+        var dadosUsuarioFacebook = await _facebookService.carregarInfosUsuarioFacebook(accessToken.token, accessToken.userId);
         SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('token', 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NzgsImVtYWlsIjoiZ2FicmllbGxlcG9ydG8yMUBnbWFpbC5jb20ifQ.G5eExxK65ZFNyVb8hokWlvPn0v5T5VVc6gUIEnjZbAw');
         this.isLoading.value = false;
