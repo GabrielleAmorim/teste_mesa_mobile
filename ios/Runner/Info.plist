@@ -46,14 +46,14 @@
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>fb644278039526613</string>
+                <string>fb1792566237549328</string>
             </array>
         </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>644278039526613</string>
+    <string>1792566237549328</string>
     <key>FacebookDisplayName</key>
-    <string>Mesa Mobile</string>
+    <string>Teste Mesa Mobile</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>fbapi</string>

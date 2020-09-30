@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Mesa Mobile</string>
-    <string name="facebook_app_id">644278039526613</string>
-    <string name="fb_login_protocol_scheme">fb644278039526613</string>
-
-</resources>
+    <resources>
+        <string name="app_name">Teste Mesa Mobile</string>
+        <string name="facebook_app_id">1792566237549328</string>
+        <string name="fb_login_protocol_scheme">fb1792566237549328</string>
+    </resources>
